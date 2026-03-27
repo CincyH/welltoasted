@@ -1,3 +1,5 @@
+const https = require('https');
+
 exports.handler = async function(event) {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
@@ -18,7 +20,7 @@ exports.handler = async function(event) {
     rush: '5-6 minutes (approximately 650-800 words)'
   };
 
-  const prompt = `You are a professional roast and speech writer. Write a ${packageLengths[pkg]} ${occasion} speech.
+  const prompt = `You are a professional roast and speech writer. Write a ${packageLengths[pkg] || packageLengths.standard} ${occasion || 'roast'} speech.
 
 ABOUT THE HONOREE:
 Name: ${honoree}
@@ -26,8 +28,8 @@ Relationship to speaker: ${relationship}
 Event date: ${eventDate}
 Audience: ${audience}
 
-HEAT LEVEL: ${heat.toUpperCase()}
-Instructions: ${heatInstructions[heat]}
+HEAT LEVEL: ${(heat || 'medium').toUpperCase()}
+Instructions: ${heatInstructions[heat] || heatInstructions.medium}
 
 MATERIAL TO USE:
 ${dirt}
@@ -40,32 +42,53 @@ ${tone || 'None specified'}
 
 Write a complete, polished, ready-to-deliver speech. Make it feel personal, specific, and genuinely funny. Structure it well with a strong opening, middle, and closing. End on a warm note even if the rest is a roast.`;
 
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+  const requestBody = JSON.stringify({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 1500,
+    messages: [{ role: 'user', content: prompt }]
+  });
+
+  return new Promise((resolve) => {
+    const options = {
+      hostname: 'api.anthropic.com',
+      path: '/v1/messages',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': process.env.ANTHROPIC_KEY,
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1500,
-        messages: [{ role: 'user', content: prompt }]
-      })
+        'anthropic-version': '2023-06-01',
+        'Content-Length': Buffer.byteLength(requestBody)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let body = '';
+      res.on('data', (chunk) => body += chunk);
+      res.on('end', () => {
+        try {
+          const parsed = JSON.parse(body);
+          const speech = parsed.content[0].text;
+          resolve({
+            statusCode: 200,
+            body: JSON.stringify({ speech })
+          });
+        } catch (err) {
+          resolve({
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Failed to parse response', raw: body })
+          });
+        }
+      });
     });
 
-    const result = await response.json();
-    const speech = result.content[0].text;
+    req.on('error', (err) => {
+      resolve({
+        statusCode: 500,
+        body: JSON.stringify({ error: err.message })
+      });
+    });
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ speech })
-    };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: err.message })
-    };
-  }
+    req.write(requestBody);
+    req.end();
+  });
 };
