@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="9GVOC2P44GLbO9XKrxthJigcKrEpY9Yk6P_rV0l0u6o" />
+<title>Well Toasted — Roast & Speech Writing Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cabinet+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --dark: #1A1208;
+  --dark2: #2A1F0E;
+  --amber: #E8910A;
+  --amber-light: #F5B93A;
+  --amber-pale: #FDF3DC;
+  --cream: #FAF5EC;
+  --warm: #F5ECD8;
+  --muted: #8C7A5E;
+  --border: #E2D5BC;
+  --red: #C23B22;
+  --text: #2A1F0E;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--dark);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--amber-light);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+.nav-logo span { font-style: italic; color: #fff; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  text-decoration: none; color: rgba(255,255,255,0.6);
+  font-size: 0.875rem; font-weight: 400;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--amber-light); }
+.btn-nav {
+  background: var(--amber) !important; color: var(--dark) !important;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  font-size: 0.875rem !important; font-weight: 700 !important;
+  transition: background 0.2s !important;
+}
+.btn-nav:hover { background: var(--amber-light) !important; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: var(--dark);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 8rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(232,145,10,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-lines {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(232,145,10,0.04) 60px, rgba(232,145,10,0.04) 61px);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--amber); font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '🔥'; font-size: 0.875rem;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  color: #fff;
+  max-width: 820px;
+  margin: 0 auto 0.5rem;
+  letter-spacing: -0.02em;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--amber-light);
+  display: block;
+}
+.hero-sub {
+  font-size: 1.125rem; color: rgba(255,255,255,0.55);
+  max-width: 500px; margin: 1.5rem auto 2.5rem;
+  font-weight: 300; line-height: 1.8;
+}
+.hero-cta {
+  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+}
+.btn-primary {
+  background: var(--amber); color: var(--dark);
+  padding: 0.875rem 2.25rem;
+  border-radius: 4px; text-decoration: none;
+  font-size: 0.9375rem; font-weight: 700;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-block; letter-spacing: 0.02em;
+}
+.btn-primary:hover { background: var(--amber-light); transform: translateY(-2px); }
+.btn-secondary {
+  background: transparent; color: rgba(255,255,255,0.7);
+  padding: 0.875rem 2.25rem;
+  border-radius: 4px; text-decoration: none;
+  font-size: 0.9375rem; font-weight: 400;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+.btn-secondary:hover { border-color: var(--amber); color: var(--amber); }
+.hero-badges {
+  margin-top: 3rem;
+  display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+}
+.hero-badge {
+  font-size: 0.8125rem; color: rgba(255,255,255,0.4);
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.hero-badge span { color: var(--amber); }
+
+/* HEAT SECTION */
+.heat-section {
+  background: var(--amber);
+  padding: 1rem 2rem;
+  text-align: center;
+}
+.heat-section p {
+  font-size: 0.875rem; font-weight: 700;
+  color: var(--dark); letter-spacing: 0.05em; text-transform: uppercase;
+}
+
+/* SECTION COMMON */
+section { padding: 5rem 2rem; }
+.section-inner { max-width: 960px; margin: 0 auto; }
+.section-label {
+  font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--amber); font-weight: 700; margin-bottom: 0.75rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700; line-height: 1.2;
+  margin-bottom: 1rem; color: var(--dark);
+}
+.section-title em { font-style: italic; color: var(--amber); }
+.section-sub {
+  color: var(--muted); font-size: 1.0625rem;
+  max-width: 560px; font-weight: 300; line-height: 1.8;
+}
+
+/* OCCASIONS */
+.occasions { background: var(--dark2); }
+.occasions .section-title { color: #fff; }
+.occasions .section-sub { color: rgba(255,255,255,0.5); }
+.occasions .section-label { color: var(--amber); }
+.occasion-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px; margin-top: 3rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px; overflow: hidden;
+}
+.occasion-card {
+  background: rgba(255,255,255,0.03);
+  padding: 2rem 1.5rem;
+  transition: background 0.2s;
+  cursor: default;
+}
+.occasion-card:hover { background: rgba(232,145,10,0.1); }
+.occasion-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.occasion-card h3 { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+.occasion-card p { font-size: 0.875rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+/* HOW IT WORKS */
+.how { background: var(--cream); }
+.steps {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem; margin-top: 3rem; position: relative;
+}
+.step { position: relative; }
+.step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem; font-weight: 900;
+  color: var(--border); line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark); }
+.step p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+/* HEAT LEVEL */
+.heat-level-section { background: var(--warm); }
+.heat-cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem; margin-top: 3rem;
+}
+.heat-card {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 8px; padding: 1.75rem;
+  transition: border-color 0.2s, transform 0.2s;
+  text-align: center;
+}
+.heat-card:hover { transform: translateY(-3px); }
+.heat-card.mild:hover { border-color: #F5A623; }
+.heat-card.medium:hover { border-color: #E8610A; }
+.heat-card.hot:hover { border-color: var(--red); }
+.heat-peppers { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
+.heat-card h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark); }
+.heat-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+.heat-example {
+  margin-top: 0.75rem; padding: 0.75rem;
+  background: var(--cream); border-radius: 4px;
+  font-size: 0.8125rem; color: var(--muted); font-style: italic;
+}
+
+/* PRICING */
+.pricing { background: var(--cream); }
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem; margin-top: 3rem;
+}
+.pricing-card {
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 8px; padding: 2rem 1.75rem;
+  position: relative; transition: border-color 0.2s, transform 0.2s;
+}
+.pricing-card:hover { transform: translateY(-3px); border-color: var(--amber); }
+.pricing-card.featured { border-color: var(--amber); background: var(--dark); }
+.featured-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--amber); color: var(--dark);
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-weight: 700; padding: 0.3rem 1rem; border-radius: 4px; white-space: nowrap;
+}
+.price-label { font-size: 0.8125rem; color: var(--muted); margin-bottom: 0.25rem; font-weight: 500; }
+.pricing-card.featured .price-label { color: rgba(255,255,255,0.5); }
+.price {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 900; line-height: 1;
+  color: var(--dark); margin-bottom: 0.25rem;
+}
+.pricing-card.featured .price { color: var(--amber-light); }
+.price sup { font-size: 1.5rem; vertical-align: super; }
+.price-desc { font-size: 0.8125rem; color: var(--muted); margin-bottom: 1.5rem; }
+.pricing-card.featured .price-desc { color: rgba(255,255,255,0.4); }
+.pricing-card ul { list-style: none; padding: 0; }
+.pricing-card ul li {
+  font-size: 0.875rem; color: var(--muted);
+  padding: 0.4rem 0; border-top: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.pricing-card.featured ul li { border-top-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+.pricing-card ul li::before {
+  content: '✦'; color: var(--amber); font-size: 0.6rem; flex-shrink: 0;
+}
+.pricing-cta {
+  display: block; text-align: center;
+  margin-top: 1.5rem; padding: 0.75rem 1rem;
+  border-radius: 4px; font-size: 0.875rem; font-weight: 700;
+  text-decoration: none; transition: all 0.2s;
+  border: 2px solid var(--border); color: var(--dark); background: transparent;
+  letter-spacing: 0.02em;
+}
+.pricing-card.featured .pricing-cta { background: var(--amber); color: var(--dark); border-color: var(--amber); }
+.pricing-cta:hover { background: var(--amber); color: var(--dark); border-color: var(--amber); }
+
+/* FORM */
+.intake { background: var(--dark); }
+.intake .section-title { color: #fff; }
+.intake .section-sub { color: rgba(255,255,255,0.45); }
+.form-wrap {
+  background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 2.5rem; margin-top: 3rem;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.375rem; }
+.form-group.full { grid-column: 1 / -1; }
+label { font-size: 0.8125rem; font-weight: 700; color: rgba(255,255,255,0.7); letter-spacing: 0.05em; text-transform: uppercase; }
+input, select, textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 0.9375rem; color: #fff;
+  background: rgba(255,255,255,0.05);
+  transition: border-color 0.2s; outline: none; width: 100%;
+}
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.25); }
+input:focus, select:focus, textarea:focus { border-color: var(--amber); }
+textarea { resize: vertical; min-height: 120px; }
+select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+select option { background: var(--dark2); color: #fff; }
+.form-hint { font-size: 0.775rem; color: rgba(255,255,255,0.3); }
+
+/* HEAT SELECTOR */
+.heat-selector { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.heat-option { display: none; }
+.heat-option + label {
+  cursor: pointer; padding: 0.6rem 1.25rem;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 4px; font-size: 0.875rem; font-weight: 700;
+  color: rgba(255,255,255,0.4); transition: all 0.2s;
+  text-transform: none; letter-spacing: 0;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.heat-option:checked + label { border-color: var(--amber); color: var(--amber); background: rgba(232,145,10,0.1); }
+
+.submit-btn {
+  width: 100%; padding: 1rem;
+  background: var(--amber); color: var(--dark);
+  border: none; border-radius: 4px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  cursor: pointer; margin-top: 0.5rem;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.submit-btn:hover { background: var(--amber-light); transform: translateY(-1px); }
+.ai-disclosure {
+  font-size: 0.775rem; color: rgba(255,255,255,0.3);
+  text-align: center; margin-top: 1rem;
+  display: flex; align-items: center; gap: 0.4rem; justify-content: center;
+}
+.ai-badge {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  background: rgba(232,145,10,0.15); color: var(--amber);
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem; border-radius: 4px;
+  border: 1px solid rgba(232,145,10,0.3);
+}
+
+/* TESTIMONIALS */
+.testimonials { background: var(--warm); }
+.testimonial-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin-top: 3rem;
+}
+.testimonial-card {
+  background: #fff; border: 2px solid var(--border);
+  border-radius: 8px; padding: 1.75rem;
+}
+.testimonial-stars { color: var(--amber); font-size: 1rem; margin-bottom: 1rem; }
+.testimonial-text { font-size: 0.9375rem; color: var(--text); line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; }
+.testimonial-occasion {
+  display: inline-block; font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--amber-pale); color: var(--amber);
+  padding: 0.25rem 0.75rem; border-radius: 4px; margin-bottom: 0.5rem;
+}
+.testimonial-author { font-size: 0.8125rem; color: var(--muted); font-weight: 700; }
+
+/* FOOTER */
+footer {
+  background: var(--dark); color: rgba(255,255,255,0.4);
+  padding: 3rem 2rem 2rem; text-align: center;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 900; color: var(--amber-light);
+  margin-bottom: 0.25rem; font-style: italic;
+}
+.footer-tagline { font-size: 0.875rem; margin-bottom: 2rem; color: rgba(255,255,255,0.3); }
+.footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+.footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--amber); }
+.footer-bottom { font-size: 0.775rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow { animation: fadeUp 0.6s ease both; }
+.hero h1 { animation: fadeUp 0.6s 0.1s ease both; }
+.hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
+.hero-cta { animation: fadeUp 0.6s 0.3s ease both; }
+.hero-badges { animation: fadeUp 0.6s 0.4s ease both; }
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Well <span>Toasted</span></a>
+  <div class="nav-links">
+    <a href="#occasions">Occasions</a>
+    <a href="#heat">Heat Level</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#order" class="btn-nav">Order Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-eyebrow">Roast & Speech Writing Service</div>
+  <h1>We Write the Roast.<br><em>You Take the Credit.</em></h1>
+  <p class="hero-sub">Killer roast speeches, best man toasts, and party speeches — personalized, hilarious, and delivered fast. You just show up and deliver.</p>
+  <div class="hero-cta">
+    <a href="#order" class="btn-primary">🔥 Order Your Speech</a>
+    <a href="#pricing" class="btn-secondary">See Pricing</a>
+  </div>
+  <div class="hero-badges">
+    <div class="hero-badge"><span>✦</span> Delivered in 24hrs</div>
+    <div class="hero-badge"><span>✦</span> Starting at $99</div>
+    <div class="hero-badge"><span>✦</span> Choose your heat level</div>
+    <div class="hero-badge"><span>✦</span> One revision included</div>
+  </div>
+</section>
+
+<!-- HEAT BANNER -->
+<div class="heat-section">
+  <p>🌶 The only speech service that lets you choose exactly how savage to go 🌶</p>
+</div>
+
+<!-- OCCASIONS -->
+<section class="occasions" id="occasions">
+  <div class="section-inner">
+    <div class="section-label">What We Write</div>
+    <h2 class="section-title">Every occasion worth <em>celebrating</em></h2>
+    <p class="section-sub">We specialize in roasts — but we write every speech where someone deserves to be celebrated, teased, or both.</p>
+    <div class="occasion-grid">
+      <div class="occasion-card">
+        <span class="occasion-icon">🔥</span>
+        <h3>Roast Speeches</h3>
+        <p>The classic. Birthdays, retirements, bachelor parties. We roast with love — or without it, your call.</p>
+      </div>
+      <div class="occasion-card">
+        <span class="occasion-icon">💍</span>
+        <h3>Best Man Speech</h3>
+        <p>The most terrifying 5 minutes of your life. We'll make you look like you've been funny your whole life.</p>
+      </div>
+      <div class="occasion-card">
+        <span class="occasion-icon">💐</span>
+        <h3>Maid of Honor</h3>
+        <p>Heartfelt, hilarious, or both. A speech that has her crying and laughing at the same time.</p>
+      </div>
+      <div class="occasion-card">
+        <span class="occasion-icon">🎂</span>
+        <h3>Birthday Roast</h3>
+        <p>For the milestone birthdays. 30, 40, 50, 60 — the older they are, the more material we have.</p>
+      </div>
+      <div class="occasion-card">
+        <span class="occasion-icon">🏆</span>
+        <h3>Retirement Roast</h3>
+        <p>Send them off with the sendoff they deserve. Decades of material, one legendary speech.</p>
+      </div>
+      <div class="occasion-card">
+        <span class="occasion-icon">🥂</span>
+        <h3>Wedding Toast</h3>
+        <p>Father of the bride, mother of the groom — a warm, memorable toast that doesn't ramble.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-inner">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Simple. Fast. <em>Legendary.</em></h2>
+    <p class="section-sub">From order to speech in as little as a few hours. You provide the dirt, we do the rest.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Spill the details</h3>
+        <p>Tell us about the guest of honor — their quirks, embarrassing stories, what makes them easy to tease.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Pick your heat level</h3>
+        <p>Mild and clean, medium with some edge, or full hot — you choose how savage we go.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>We write the magic</h3>
+        <p>A personalized, polished speech lands in your inbox. Funny, structured, ready to deliver.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Take all the credit</h3>
+        <p>Walk in, deliver the speech, collect your laughs. Nobody needs to know. That's between us. 🤫</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HEAT LEVEL -->
+<section class="heat-level-section" id="heat">
+  <div class="section-inner">
+    <div class="section-label">The Roast Dial</div>
+    <h2 class="section-title">Choose your <em>heat level</em></h2>
+    <p class="section-sub">Every roast order lets you dial in exactly how spicy to go. We calibrate the humor to your crowd.</p>
+    <div class="heat-cards">
+      <div class="heat-card mild">
+        <span class="heat-peppers">🌶</span>
+        <h3>Mild</h3>
+        <p>Playful and warm. Safe for grandma, the kids, and your boss. Plenty of laughs, zero awkward silences.</p>
+        <div class="heat-example">"Dave has always been generous — generous with other people's food, generous with other people's Netflix passwords..."</div>
+      </div>
+      <div class="heat-card medium">
+        <span class="heat-peppers">🌶🌶</span>
+        <h3>Medium</h3>
+        <p>Sharp and funny with some real edge. A few people will gasp before they laugh. The sweet spot for most events.</p>
+        <div class="heat-example">"They say Dave lights up every room he enters. Which is funny, because most people are relieved when he leaves."</div>
+      </div>
+      <div class="heat-card hot">
+        <span class="heat-peppers">🌶🌶🌶</span>
+        <h3>Hot</h3>
+        <p>Gloves off. Adult humor, no sacred cows. Perfect for a close group who can handle the heat. Not for funerals. Or weddings. Probably.</p>
+        <div class="heat-example">"I'd say Dave is self-made, but that would imply someone chose to make him."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Less than one awkward <em>silence</em></h2>
+    <p class="section-sub">Every package includes your chosen heat level, one revision, and delivery to your inbox.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="price-label">Standard</div>
+        <div class="price"><sup>$</sup>99</div>
+        <div class="price-desc">3–4 minute speech, 48hr delivery</div>
+        <ul>
+          <li>Personalized to your honoree</li>
+          <li>Your chosen heat level</li>
+          <li>Delivered within 48 hours</li>
+          <li>One revision included</li>
+        </ul>
+        <a href="https://buy.stripe.com/5kQfZ9ahKczN9uJcBd7Re02" target="_blank" class="pricing-cta">Order Standard</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="featured-badge">Most Popular</div>
+        <div class="price-label">Premium</div>
+        <div class="price"><sup>$</sup>149</div>
+        <div class="price-desc">5–6 minute speech, 24hr delivery</div>
+        <ul>
+          <li>Longer, richer material</li>
+          <li>Your chosen heat level</li>
+          <li>Delivered within 24 hours</li>
+          <li>Two revisions included</li>
+        </ul>
+        <a href="https://buy.stripe.com/28E4grahK8jx4ap44H7Re01" target="_blank" class="pricing-cta">Order Premium</a>
+      </div>
+      <div class="pricing-card">
+        <div class="price-label">Rush</div>
+        <div class="price"><sup>$</sup>199</div>
+        <div class="price-desc">5–6 minute speech, same day</div>
+        <ul>
+          <li>Same-day delivery</li>
+          <li>Your chosen heat level</li>
+          <li>Priority turnaround</li>
+          <li>Two revisions included</li>
+        </ul>
+        <a href="https://buy.stripe.com/9B614fdtWdDRfT7fNp7Re03" target="_blank" class="pricing-cta">Order Rush</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <div class="section-label">Real Reactions</div>
+    <h2 class="section-title">They thought I <em>wrote it myself</em></h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <span class="testimonial-occasion">Best Man Speech</span>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I had three days notice and zero ideas. The speech had my brother's whole side crying laughing. Three people asked if I was a professional writer. I am not."</p>
+        <div class="testimonial-author">— Marcus T., Chicago</div>
+      </div>
+      <div class="testimonial-card">
+        <span class="testimonial-occasion">Retirement Roast</span>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Our boss has been with the company 30 years and deserved a legendary sendoff. I went medium heat and it was absolutely perfect. He's still quoting it."</p>
+        <div class="testimonial-author">— Diane K., Austin</div>
+      </div>
+      <div class="testimonial-card">
+        <span class="testimonial-occasion">Birthday Roast</span>
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Went full hot for my buddy's 40th. He was mortified. In the best possible way. Worth every penny and then some."</p>
+        <div class="testimonial-author">— Ryan M., Nashville</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section class="intake" id="order">
+  <div class="section-inner">
+    <div class="section-label">Place Your Order</div>
+    <h2 class="section-title">Let's build your <em>speech</em></h2>
+    <p class="section-sub">The more dirt you give us, the better the roast. There are no wrong answers here.</p>
+    <div class="form-wrap">
+      <form id="speechForm" onsubmit="handleSubmit(event); return false;">
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="pkg">Package</label>
+            <select id="pkg" required>
+              <option value="">Select a package...</option>
+              <option value="standard">Standard — $99 (48hr)</option>
+              <option value="premium">Premium — $149 (24hr)</option>
+              <option value="rush">Rush — $199 (Same day)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="occasion">Occasion</label>
+            <select id="occasion" required>
+              <option value="">What's the occasion?</option>
+              <option value="roast">Roast Speech</option>
+              <option value="bestman">Best Man Speech</option>
+              <option value="moh">Maid of Honor Speech</option>
+              <option value="birthday">Birthday Roast</option>
+              <option value="retirement">Retirement Roast</option>
+              <option value="toast">Wedding Toast</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="your-name">Your Name</label>
+            <input type="text" id="your-name" placeholder="Your full name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" placeholder="Where we'll send the speech" required />
+          </div>
+
+          <div class="form-group">
+            <label for="honoree">Who are we roasting?</label>
+            <input type="text" id="honoree" placeholder="Their name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="relationship">Your relationship to them</label>
+            <input type="text" id="relationship" placeholder="e.g. best friend, brother, coworker" />
+          </div>
+
+          <div class="form-group">
+            <label for="event-date">Event date</label>
+            <input type="date" id="event-date" />
+          </div>
+
+          <div class="form-group">
+            <label for="audience">Who's in the audience?</label>
+            <input type="text" id="audience" placeholder="e.g. close friends, family mixed, work colleagues" />
+          </div>
+
+          <div class="form-group full">
+            <label>Heat Level 🌶</label>
+            <div class="heat-selector">
+              <input type="radio" name="heat" id="mild" value="mild" class="heat-option" />
+              <label for="mild">🌶 Mild — Safe for grandma</label>
+              <input type="radio" name="heat" id="medium" value="medium" class="heat-option" checked />
+              <label for="medium">🌶🌶 Medium — Some edge</label>
+              <input type="radio" name="heat" id="hot" value="hot" class="heat-option" />
+              <label for="hot">🌶🌶🌶 Hot — Gloves off</label>
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label for="dirt">Give us the dirt 🔥</label>
+            <textarea id="dirt" placeholder="Embarrassing stories, bad habits, quirks, running jokes, memorable moments, things they'd hate you to mention... the more specific the better." required></textarea>
+            <span class="form-hint">This is where the magic happens. Don't hold back.</span>
+          </div>
+
+          <div class="form-group full">
+            <label for="off-limits">Anything off limits?</label>
+            <input type="text" id="off-limits" placeholder="Topics, people, or stories to avoid..." />
+          </div>
+
+          <div class="form-group full">
+            <label for="tone">Any tone preferences?</label>
+            <input type="text" id="tone" placeholder="e.g. more funny than sentimental, end on a heartfelt note, keep it quick..." />
+          </div>
+
+          <div class="form-group full">
+            <button type="submit" class="submit-btn">🔥 Submit & Proceed to Payment</button>
+            <p class="ai-disclosure">
+              <span class="ai-badge">✦ AI-Assisted</span>
+              Speeches are crafted with AI writing assistance and reviewed for quality before delivery.
+            </p>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Well Toasted</div>
+  <p class="footer-tagline">We write the roast. You take the credit.</p>
+  <div class="footer-links">
+    <a href="#occasions">Occasions</a>
+    <a href="#heat">Heat Level</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#order">Order</a>
+    <a href="/cdn-cgi/l/email-protection#79111c151516390e1c15150d16180a0d1c1d571a1614"><span class="__cf_email__" data-cfemail="076f626b6b684770626b6b736866747362632964686a">[email&#160;protected]</span></a>
+  </div>
+  <div class="footer-bottom">&copy; 2025 Well Toasted &nbsp;&middot;&nbsp; All rights reserved</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+emailjs.init('6xvhDvWTwUSIGr5D9');
+
+// API key stored securely in Netlify environment variables
+
+const stripeLinks = {
+  standard: 'https://buy.stripe.com/5kQfZ9ahKczN9uJcBd7Re02',
+  premium: 'https://buy.stripe.com/28E4grahK8jx4ap44H7Re01',
+  rush: 'https://buy.stripe.com/9B614fdtWdDRfT7fNp7Re03'
+};
+
+window.onload = function() {
+  var form = document.getElementById('speechForm');
+  if (form) {
+    form.addEventListener('submit', handleSubmit);
+  }
+};
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.querySelector('.submit-btn');
+  btn.textContent = '⏳ Writing your speech...';
+  btn.disabled = true;
+
+  const pkg = document.getElementById('pkg').value;
+  const occasion = document.getElementById('occasion').value;
+  const customerName = document.getElementById('your-name').value;
+  const customerEmail = document.getElementById('email').value;
+  const honoree = document.getElementById('honoree').value;
+  const relationship = document.getElementById('relationship').value;
+  const eventDate = document.getElementById('event-date').value;
+  const audience = document.getElementById('audience').value;
+  const heat = document.querySelector('input[name="heat"]:checked')?.value || 'medium';
+  const dirt = document.getElementById('dirt').value;
+  const offLimits = document.getElementById('off-limits').value;
+  const tone = document.getElementById('tone').value;
+
+  const heatInstructions = {
+    mild: 'Keep the humor clean and warm. Safe for all ages including children and grandparents. Playful teasing, no edge.',
+    medium: 'Include some sharp wit and light edge. A few jokes that make people gasp before laughing. Adult but not explicit.',
+    hot: 'Gloves off. Bold adult humor, no sacred cows. Push boundaries while keeping it about the person being roasted.'
+  };
+
+  const packageLengths = {
+    standard: '3-4 minutes (approximately 450-550 words)',
+    premium: '5-6 minutes (approximately 650-800 words)',
+    rush: '5-6 minutes (approximately 650-800 words)'
+  };
+
+  const prompt = `You are a professional roast and speech writer. Write a ${packageLengths[pkg]} ${occasion} speech for the following occasion.
+
+ABOUT THE HONOREE:
+Name: ${honoree}
+Relationship to speaker: ${relationship}
+Event date: ${eventDate}
+Audience: ${audience}
+
+HEAT LEVEL: ${heat.toUpperCase()}
+Instructions: ${heatInstructions[heat]}
+
+MATERIAL TO USE:
+${dirt}
+
+OFF LIMITS:
+${offLimits || 'Nothing specified'}
+
+TONE PREFERENCES:
+${tone || 'None specified'}
+
+Write a complete, polished, ready-to-deliver speech. Make it feel personal, specific, and genuinely funny. Structure it well with a strong opening, middle, and closing. The closing should end on a warm note even if the rest is a roast.`;
+
+  try {
+    const response = await fetch('/.netlify/functions/write-speech', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pkg, occasion, honoree, relationship, eventDate, audience, heat, dirt, offLimits, tone })
+    });
+
+    const data = await response.json();
+    const speech = data.speech;
+
+    await emailjs.send('service_q44p9yu', 'template_k6offpf', {
+      package: pkg,
+      occasion: occasion,
+      customer_name: customerName,
+      customer_email: customerEmail,
+      honoree: honoree,
+      relationship: relationship,
+      event_date: eventDate,
+      audience: audience,
+      heat: heat,
+      dirt: dirt,
+      off_limits: offLimits,
+      tone: tone,
+      speech: speech
+    });
+
+    btn.textContent = '✅ Speech submitted! Proceeding to payment...';
+    setTimeout(() => {
+      window.location.href = stripeLinks[pkg] || stripeLinks.standard;
+    }, 2000);
+
+  } catch (err) {
+    console.error(err);
+    btn.textContent = '🔥 Submit & Proceed to Payment';
+    btn.disabled = false;
+    alert('Something went wrong. Please try again or email us at hello@welltoasted.net');
+  }
+}
+</script>
+</body>
+</html>
