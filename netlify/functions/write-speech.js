@@ -1,11 +1,15 @@
 const https = require('https');
 
 exports.handler = async function(event) {
+  console.log('Function started');
+  
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
   const data = JSON.parse(event.body);
+  console.log('Data received:', JSON.stringify(data));
+  
   const { pkg, occasion, honoree, relationship, eventDate, audience, heat, dirt, offLimits, tone } = data;
 
   const heatInstructions = {
@@ -48,6 +52,9 @@ Write a complete, polished, ready-to-deliver speech. Make it feel personal, spec
     messages: [{ role: 'user', content: prompt }]
   });
 
+  console.log('Calling Anthropic API...');
+  console.log('API Key exists:', !!process.env.ANTHROPIC_KEY);
+
   return new Promise((resolve) => {
     const options = {
       hostname: 'api.anthropic.com',
@@ -63,16 +70,20 @@ Write a complete, polished, ready-to-deliver speech. Make it feel personal, spec
 
     const req = https.request(options, (res) => {
       let body = '';
+      console.log('API response status:', res.statusCode);
       res.on('data', (chunk) => body += chunk);
       res.on('end', () => {
+        console.log('API response body:', body.substring(0, 200));
         try {
           const parsed = JSON.parse(body);
           const speech = parsed.content[0].text;
+          console.log('Speech generated successfully');
           resolve({
             statusCode: 200,
             body: JSON.stringify({ speech })
           });
         } catch (err) {
+          console.log('Parse error:', err.message);
           resolve({
             statusCode: 500,
             body: JSON.stringify({ error: 'Failed to parse response', raw: body })
@@ -82,13 +93,9 @@ Write a complete, polished, ready-to-deliver speech. Make it feel personal, spec
     });
 
     req.on('error', (err) => {
+      console.log('Request error:', err.message);
       resolve({
         statusCode: 500,
         body: JSON.stringify({ error: err.message })
       });
-    });
-
-    req.write(requestBody);
-    req.end();
-  });
-};
+    })
