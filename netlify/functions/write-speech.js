@@ -98,4 +98,9 @@ Write a complete, polished, ready-to-deliver speech. Make it feel personal, spec
         statusCode: 500,
         body: JSON.stringify({ error: err.message })
       });
-    })
+    });
+
+    req.write(requestBody);
+    req.end();
+  });
+};
